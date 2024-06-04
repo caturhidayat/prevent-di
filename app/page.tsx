@@ -1,19 +1,11 @@
-'use client'
+"use client";
 import Todos from "@/Components/Todos";
+import createTask from "@/action/task";
 
 export default function Home() {
-    function submitData(data: FormData) {
-        console.log(data.get('task'));
-        const task = data.get('task');
-        const res = fetch("/api/todo", {
-            method: "POST",
-            body: task,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        return res;
-    }
+    const submitTask = async (formData: FormData) => {
+        await createTask(formData);
+    };
     return (
         <div className="flex justify-center w-auto">
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -30,7 +22,7 @@ export default function Home() {
                 </div>
 
                 <form
-                    action={submitData}
+                    action={submitTask}
                     className="mx-auto mb-0 mt-8 max-w-md space-y-4"
                 >
                     <div>
